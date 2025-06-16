@@ -4,10 +4,12 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 const Products = ({ products }) => {
+
   const [slide, setSlide] = useState({
-    next: 3,
+    next: window.innerWidth > 1024 ? 3 : 0,
     prev: 0,
   });
+
   const { dispatch } = useContext(CartContext);
 
   const slideHandler = (direction) => {
@@ -56,7 +58,7 @@ const Products = ({ products }) => {
             {products.map((product, index) => (
               <div
                 id={`slide${index}`}
-                className="carousel-item w-1/3"
+                className="carousel-item w-full md:w-1/3"
                 key={product.id}
               >
                 <Product product={product} addToCart={dispatch} />
