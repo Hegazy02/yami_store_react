@@ -1,4 +1,3 @@
-import React from "react";
 import HeroBanner from "../assets/hero_banner.jpg";
 
 const Hero = () => {
@@ -16,7 +15,9 @@ const Hero = () => {
           <p className="mb-5">
             Yawi provides a products for you to live a better life.
           </p>
-          <button className="btn btn-primary"><a href="#products">Shop Now</a></button>
+          <button className="btn btn-primary">
+            <a href="#products">Shop Now</a>
+          </button>
         </div>
       </div>
     </div>

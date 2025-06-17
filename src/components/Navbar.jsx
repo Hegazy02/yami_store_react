@@ -5,6 +5,13 @@ import { Link } from "react-router";
 
 const Navbar = () => {
   const { state, dispatch } = useContext(CartContext);
+
+  const handleViewCartClick = () => {
+    // Close the dropdown by removing focus
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
+  };
   return (
     <div className="navbar bg-base-100 shadow-sm bg-[#fff] sticky top-0 z-50">
       <div className="flex-1">
@@ -44,9 +51,11 @@ const Navbar = () => {
               <span className="text-lg font-bold">
                 {state.items.length} Items
               </span>
-              <span className="text-info">Subtotal: {state.totalAmount.toFixed(2)}$</span>
+              <span className="text-info">
+                Subtotal: {state.totalAmount.toFixed(2)}$
+              </span>
               <div className="card-actions">
-                <Link to="/cart">
+                <Link to="/cart" onClick={handleViewCartClick}>
                   <button className="btn btn-primary btn-block">
                     View cart
                   </button>
