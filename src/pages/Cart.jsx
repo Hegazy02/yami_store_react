@@ -3,9 +3,15 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import EmptyCart from "../assets/empty_cart.svg";
+import { toast } from "react-hot-toast";
 
 const Cart = () => {
   const { state, dispatch } = useContext(CartContext);
+  const handleDeleteCartItems = () => {
+    dispatch({ type: "CLEAR_CART" });
+    toast.success("Cart cleared!");
+  };
+
   return (
     <div className="flex flex-col-reverse md:flex-row gap-4 md:gap-16 p-4">
       <div className="w-full md:w-2/3">
@@ -18,7 +24,7 @@ const Cart = () => {
           </h2>
           <button
             className="btn btn-circle btn-ghost"
-            onClick={() => dispatch({ type: "CLEAR_CART" })}
+            onClick={handleDeleteCartItems}
           >
             <MdOutlineDeleteSweep className="text-2xl" />
           </button>

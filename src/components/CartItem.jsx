@@ -2,10 +2,15 @@ import { memo } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { CiCircleMinus } from "react-icons/ci";
+import { toast } from "react-hot-toast";
 
 const CartItem = memo(({ dispatch, item }) => {
   console.log("CartItem rendered");
-  const iconStyle = "btn btn-circle btn-ghost"; 
+  const iconStyle = "btn btn-circle btn-ghost";
+  const handleDeleteItem = () => {
+    dispatch({ type: "REMOVE_FROM_CART", payload: item });
+    toast.success("Item Deleted!");
+  };
   return (
     <li className="list-row">
       <div>
@@ -30,10 +35,7 @@ const CartItem = memo(({ dispatch, item }) => {
         >
           <CiCircleMinus className="text-2xl" />
         </button>
-        <button
-          className={iconStyle}
-          onClick={() => dispatch({ type: "REMOVE_FROM_CART", payload: item })}
-        >
+        <button className={iconStyle} onClick={handleDeleteItem}>
           <TiDeleteOutline className="text-2xl" />
         </button>
       </div>

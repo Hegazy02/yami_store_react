@@ -10,7 +10,7 @@ const Products = ({ products }) => {
     prev: 0,
   });
 
-  const { dispatch } = useContext(CartContext);
+  const { state,dispatch } = useContext(CartContext);
 
   const slideHandler = (direction) => {
     switch (direction) {
@@ -58,10 +58,10 @@ const Products = ({ products }) => {
             {products.map((product, index) => (
               <div
                 id={`slide${index}`}
-                className="carousel-item w-full md:w-1/3"
+                className="carousel-item w-full md:w-1/5"
                 key={product.id}
               >
-                <Product product={product} addToCart={dispatch} />
+                <Product product={product} addToCart={dispatch} state={state}/>
               </div>
             ))}
           </div>

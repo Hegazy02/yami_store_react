@@ -1,19 +1,22 @@
 import React, { memo } from "react";
+import { toast } from "react-hot-toast";
 
-const Product = memo(({ product, addToCart }) => {
+const Product = memo(({ product, addToCart, state }) => {
   console.log("Product rendered");
 
   const handleAddToCart = () => {
     addToCart({ type: "ADD_TO_CART", payload: product });
+    showToast();
+  };
+  const showToast = () => {
+    if (!state.items.some((item) => item.id === product.id)) {
+      toast.success("Product added to cart!");
+    }
   };
   return (
     <div className="card bg-base-100 shadow-sm w-full">
       <figure>
-        <img
-          src={product.image}
-          alt={product.title}
-          className="h-48 w-full"
-        />
+        <img src={product.image} alt={product.title} className="h-48 w-full" />
       </figure>
 
       <div className="card-body">
@@ -31,7 +34,7 @@ const Product = memo(({ product, addToCart }) => {
             ? product.description.slice(0, 40) + "..."
             : product.description}
         </p>
-    
+
         <div className="card-actions justify-between items-center mt-2">
           <button className="btn btn-primary" onClick={handleAddToCart}>
             Add to Cart
