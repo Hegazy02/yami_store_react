@@ -15,7 +15,9 @@ const Product = memo(({ product, addToCart, state }) => {
   };
   return (
     <div className="card bg-base-100 shadow-sm w-full">
-      <figure>
+      <figure className="relative">
+        <div className="badge badge-secondary absolute top-2 left-2">{product.category}</div>
+
         <img src={product.image} alt={product.title} className="h-48 w-full" />
       </figure>
 
@@ -39,7 +41,6 @@ const Product = memo(({ product, addToCart, state }) => {
           <button className="btn btn-primary" onClick={handleAddToCart}>
             Add to Cart
           </button>
-          <div className="badge badge-outline">{product.category}</div>
         </div>
       </div>
     </div>

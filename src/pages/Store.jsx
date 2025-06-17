@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Banners from "../components/Banners";
 import Hero from "../components/Hero";
 import Products from "../components/Products";
-import { CartContext } from "../context/CartContext";
 import { get } from "../services/httpService";
+import CardWithImage from "../components/CardWithImage";
 
 const store = () => {
   const [products, setProducts] = useState([]);
@@ -19,6 +19,7 @@ const store = () => {
       <Hero />
       <Products products={products} />
       <Banners />
+      <CardWithImage />
     </div>
   );
 };
