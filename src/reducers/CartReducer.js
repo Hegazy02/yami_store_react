@@ -1,6 +1,7 @@
 export const initialState = {
   items: [],
   totalAmount: 0,
+  subTotalAmount: 0,
   discountCode: "",
   discount: 0,
   error: "",
@@ -29,6 +30,7 @@ export const cartReducer = (state, action) => {
             quantity: 1,
           },
         ],
+        subTotalAmount: state.subTotalAmount + action.payload.price,
         totalAmount: state.totalAmount + action.payload.price,
         error: "",
       };
@@ -41,6 +43,8 @@ export const cartReducer = (state, action) => {
       newState = {
         ...state,
         items: state.items.filter((item) => item.id !== action.payload.id),
+        subTotalAmount:
+          state.subTotalAmount - action.payload.price * removedItem.quantity,
         totalAmount:
           state.totalAmount - action.payload.price * removedItem.quantity,
         error: "",
@@ -54,6 +58,7 @@ export const cartReducer = (state, action) => {
             ? { ...item, quantity: item.quantity + 1 }
             : item
         ),
+        subTotalAmount: state.subTotalAmount + action.payload.price,
         totalAmount: state.totalAmount + action.payload.price,
         error: "",
       };
@@ -70,6 +75,7 @@ export const cartReducer = (state, action) => {
               ? { ...item, quantity: item.quantity - 1 }
               : item
           ),
+          subTotalAmount: state.subTotalAmount - action.payload.price,
           totalAmount: state.totalAmount - action.payload.price,
           error: "",
         };
@@ -81,6 +87,9 @@ export const cartReducer = (state, action) => {
         ...state,
         discountCode: action.payload.discountCode,
         discount: action.payload.discount,
+        totalAmount:
+          state.subTotalAmount -
+          state.subTotalAmount * (action.payload.discount / 100),
         error: "",
       };
       return saveCart(newState);
@@ -91,6 +100,7 @@ export const cartReducer = (state, action) => {
         discountCode: "",
         discount: 0,
         error: "",
+        totalAmount: state.subTotalAmount,
       };
       return saveCart(newState);
 
@@ -99,6 +109,7 @@ export const cartReducer = (state, action) => {
         ...state,
         items: [],
         totalAmount: 0,
+        subTotalAmount: 0,
         error: "",
       };
       return saveCart(newState);

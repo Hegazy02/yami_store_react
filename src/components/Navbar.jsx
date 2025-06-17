@@ -52,7 +52,7 @@ const Navbar = () => {
                 {state.items.length} Items
               </span>
               <span className="text-info">
-                Subtotal: {state.totalAmount.toFixed(2)}$
+                Subtotal: {state.subTotalAmount.toFixed(2)}$
               </span>
               <div className="card-actions">
                 <Link to="/cart" onClick={handleViewCartClick}>

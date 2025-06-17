@@ -4,6 +4,7 @@ import { CartContext } from "../context/CartContext";
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import EmptyCart from "../assets/empty_cart.svg";
 import { toast } from "react-hot-toast";
+import CartCheckout from "../components/CartCheckout";
 
 const Cart = () => {
   const { state, dispatch } = useContext(CartContext);
@@ -41,26 +42,7 @@ const Cart = () => {
           </div>
         )}
       </div>
-      <div className="flex flex-col mt-4 p-4  md:w-1/3 h-1/3  border border-gray-300 rounded">
-        <input
-          type="text"
-          placeholder="Promo Code"
-          className="input input-bordered w-full bg-gray-100 focus:outline-none mb-4"
-        />
-        <p className="text-sm text-gray-500">Discount: $ {state.discount}</p>
-        <p className="text-sm text-gray-500">
-          Subtotal: $ {state.totalAmount.toFixed(2)}
-        </p>
-        <h3 className="text-lg font-semibold">
-          Total: $ {(state.totalAmount - state.discount).toFixed(2)}
-        </h3>
-        <button
-          className="btn btn-primary mt-2"
-          disabled={state.items.length === 0}
-        >
-          Checkout
-        </button>
-      </div>
+      <CartCheckout state={state} dispatch={dispatch} />
     </div>
   );
 };
